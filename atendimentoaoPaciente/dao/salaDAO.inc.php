@@ -10,6 +10,8 @@ final class salaDAO
         $this->con = (new Conexao())->getConexao();
     }
 
+    //Utiliza o SELECT para exibir as salas
+
     public function obterTodas()
     {
         $sql = $this->con->prepare("SELECT * FROM sala");
