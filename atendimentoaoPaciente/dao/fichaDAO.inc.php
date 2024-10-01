@@ -24,12 +24,15 @@ final class fichaDAO
 
     public function cadastrarFicha(string $cpf, string $motivo, string $data)
     {
+       //Atribui os valores na ficha
         $sql = $this->con->prepare("INSERT INTO ficha (cpf_paciente, motivo, data_hora, status) VALUES (:cpf, :motivo, :data, false)");
         $sql->bindValue(':cpf', $cpf);
         $sql->bindValue(':motivo', $motivo);
         $sql->bindValue(':data', $data);
         $sql->execute();
     }
+
+    //ajunta e seleciona as fichas não finalizadas de um paciente pelo CPF.
 
     public function buscarTodos() : array
     {
@@ -39,6 +42,8 @@ final class fichaDAO
         $sql->execute();
         return $sql->fetchAll(PDO::FETCH_OBJ);
     }
+
+    //Atualiza o status de uma ficha para finalizado.
 
     public function finalizarFicha(int $id)
     {
