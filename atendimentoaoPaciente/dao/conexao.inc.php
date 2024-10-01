@@ -1,5 +1,6 @@
 <?php
 
+//Classe responsável por estabelecer a conexão com o banco de dados.
 class Conexao
 {
       private $servidor_mysql = 'localhost';  // Somente o host
