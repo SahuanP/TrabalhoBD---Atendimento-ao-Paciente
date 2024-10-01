@@ -9,15 +9,18 @@ final class EncaminhamentoDAO
         $this->con = (new Conexao())->getConexao();
     }
 
+    //Cadastro de encaminhamentos, com base nos Dados recebidos.
     public function cadastrarEncaminhamento(int $id_ficha, int $id_sala, int $prioridade)
     {
         $sql = $this->con->prepare("INSERT INTO encaminhamento (id_ficha, id_sala, prioridade, data_hora) VALUES (:id_ficha, :id_sala, :prioridade, NOW())");
-        $sql->bindValue(':id_ficha', $id_ficha);
+        //Atribuição de valores
+        $sql->bindValue(':id_ficha', $id_ficha); 
         $sql->bindValue(':id_sala', $id_sala);
         $sql->bindValue(':prioridade', $prioridade);
         $sql->execute();
     }
 
+    //Busca e Lista todos os encaminhamentos para determinada ficha.
     public function buscarTodosParaFicha(int $id_ficha) : array
     {
         $sql = $this->con->prepare("SELECT * FROM encaminhamento e INNER JOIN sala s ON s.id_sala = e.id_sala WHERE id_ficha = :id_ficha");
